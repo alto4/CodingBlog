@@ -20,8 +20,8 @@ export default function Navbar() {
           <Button to='/' component={Link} color='inherit'>
             Posts
           </Button>
-          <Button to='/login' component={Link} color='inherit'>
-            Login
+          <Button to='/signin' component={Link} color='inherit'>
+            Sign In
           </Button>
         </Toolbar>
       </AppBar>

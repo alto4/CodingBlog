@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import PostItem from './PostItem';
 import axios from 'axios';
 
@@ -24,6 +25,12 @@ const Posts = () => {
 
   return (
     <Grid container padding={5} justifyContent='center'>
+      <Grid item textAlign='left' xs={12} md={10} lg={7}>
+        <Typography to='/add' variant='button' component={Link} color='inherit'>
+          + Create a New Post
+        </Typography>
+      </Grid>
+
       {posts.map((post) => (
         <PostItem post={post} key={post.title} />
       ))}

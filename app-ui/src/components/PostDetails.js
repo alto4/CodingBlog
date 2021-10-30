@@ -25,8 +25,21 @@ const PostDetails = (props) => {
   const { title, content } = post;
 
   return (
-    <Grid container padding={5} justifyContent='center' flexDirection='column' a>
-      <Typography variant='h1'>{title}</Typography>
+    <Grid
+      container
+      item
+      xs={12}
+      md={10}
+      lg={7}
+      py={2}
+      px={6}
+      justifyContent='center'
+      flexDirection='column'
+      style={{ margin: '2rem auto' }}
+    >
+      <Typography variant='h1' m={2} textAlign='center'>
+        {title}
+      </Typography>
       <p>{content}</p>
     </Grid>
   );
