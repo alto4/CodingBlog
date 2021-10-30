@@ -4,17 +4,25 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
 export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
         <Toolbar>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography to='/' variant='h6' component={Link} sx={{ flexGrow: 1 }} color='inherit'>
             Coding Blog
           </Typography>
-          <Button color='inherit'>Home</Button>
-          <Button color='inherit'>Posts</Button>
-          <Button color='inherit'>Login</Button>
+          <Button to='/' component={Link} color='inherit'>
+            Home
+          </Button>
+          <Button to='/' component={Link} color='inherit'>
+            Posts
+          </Button>
+          <Button to='/login' component={Link} color='inherit'>
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

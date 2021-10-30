@@ -10,4 +10,16 @@ export const theme = createTheme({
       main: '#f50057',
     },
   },
+  typography: {
+    h1: {
+      fontSize: '2.5rem',
+      fontWeight: '700',
+      color: '#333',
+    },
+    h2: {
+      fontSize: '1.7rem',
+      fontWeight: '700',
+      color: '#333',
+    },
+  },
 });

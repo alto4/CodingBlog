@@ -7,25 +7,20 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get('http://localhost:8000/api');
+        const savedPosts = res.data;
+
+        setPosts(savedPosts);
+        console.log(posts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get('http://localhost:8000/api');
-      const savedPosts = res.data;
-
-      setPosts(savedPosts);
-      console.log(posts);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const sample = {
-    title: 'Test1',
-    description: 'Test description',
-  };
+  }, [posts]);
 
   return (
     <Grid container padding={5} justifyContent='center'>

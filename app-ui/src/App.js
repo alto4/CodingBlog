@@ -1,16 +1,18 @@
+import BaseRouter from './routes';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import './App.css';
 import Navbar from './components/layouts/Navbar';
 import { theme } from './assets/theme';
 import { ThemeProvider } from '@emotion/react';
-import Posts from './components/Posts';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <Router>
         <Navbar />
-        <Posts />
-      </div>
+        <BaseRouter />
+      </Router>
     </ThemeProvider>
   );
 }
