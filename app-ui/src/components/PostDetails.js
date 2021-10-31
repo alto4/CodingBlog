@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,6 +24,20 @@ const PostDetails = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const deletePost = async () => {
+    try {
+      const postID = props.match.params.postID;
+      const res = await axios.delete(`http://localhost:8000/api/${postID}`);
+
+      console.log(res);
+      console.log(`Successfully deleted post #${postID}`);
+
+      props.history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const { title, content } = post;
   const postID = props.match.params.postID;
 
@@ -43,10 +57,19 @@ const PostDetails = (props) => {
       <Typography variant='h1' m={2} textAlign='center'>
         {title}
       </Typography>
-      <Typography to={{ pathname: `/edit/${postID}`, postID }} variant='button' component={Link} color='inherit' my={2}>
+      <Typography
+        to={{ pathname: `/edit/${postID}`, post: post }}
+        variant='button'
+        component={Link}
+        color='inherit'
+        my={2}
+      >
         + Edit Post
       </Typography>
       <p>{content}</p>
+      <Button onClick={deletePost} color='error' variant='contained' sx={{ mt: 6, mb: 2 }} style={{ width: '200px' }}>
+        Delete Post
+      </Button>
     </Grid>
   );
 };

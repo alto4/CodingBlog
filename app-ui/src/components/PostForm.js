@@ -16,29 +16,53 @@ const PostForm = (props, { requestType, formType }) => {
 
   useEffect(() => {
     //const postID = props.match.params.postID;
-    console.log(props.history);
+
+    if (postID) {
+      console.log('Post id: ' + postID);
+
+      const fetchPostDetails = async () => {
+        try {
+          const res = await axios.get(`http://localhost:8000/api/${postID}`);
+          console.log(res.data);
+          const savedPost = res.data;
+
+          setTitle(savedPost.title);
+          setDescription(savedPost.description);
+          setContent(savedPost.content);
+          setURL(savedPost.url);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchPostDetails();
+    }
   }, []);
 
   const handleSubmit = async (e, type, postID) => {
-    e.preventDefault();
-    console.log('Form submit handled here.');
+    console.log('Form submit handled here. Type: ' + type);
 
     const newPost = { title, description, content, url };
     console.log(newPost);
 
     switch (type) {
       case 'post':
+        console.log('Creating a new post.');
         try {
           const res = await axios.post('http://localhost:8000/api/', newPost);
           console.log(res);
+
+          props.history.push('/');
         } catch (error) {
           console.error(error);
         }
         break;
       case 'put':
+        console.log('Editing an existing post.');
         try {
           const res = await axios.put(`http://localhost:8000/api/${postID}/`, newPost);
           console.log(res);
+          props.history.push('/');
         } catch (error) {
           console.error(error);
         }
@@ -63,7 +87,7 @@ const PostForm = (props, { requestType, formType }) => {
           <Typography component='h1' variant='h1'>
             {props.formType === 'add' ? 'Create a New Post' : `Edit Post #${postID}`}
           </Typography>
-          <Box component='form' onSubmit={(e) => handleSubmit(e, requestType, postID)} noValidate sx={{ mt: 1 }}>
+          <Box component='form' onSubmit={(e) => handleSubmit(e, props.requestType, postID)} noValidate sx={{ mt: 1 }}>
             <TextField
               margin='normal'
               required
@@ -106,7 +130,7 @@ const PostForm = (props, { requestType, formType }) => {
               onChange={(e) => setURL(e.target.value)}
             />
             <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-              Create Post
+              {props.formType === 'add' ? 'Create Post' : 'Update Post'}
             </Button>
           </Box>{' '}
         </Box>
