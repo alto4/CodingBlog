@@ -14,14 +14,14 @@ const Posts = () => {
         const savedPosts = res.data;
 
         setPosts(savedPosts);
-        console.log(posts);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchPosts();
-  }, [posts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid container padding={5} justifyContent='center'>

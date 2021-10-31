@@ -9,7 +9,7 @@ const PostDetails = (props) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const postID = props.match.params.articleID;
+        const postID = props.match.params.postID;
         const res = await axios.get(`http://localhost:8000/api/${postID}`);
         const savedPost = res.data;
 
@@ -21,9 +21,11 @@ const PostDetails = (props) => {
     };
 
     fetchPost();
-  }, [post, props.match.params.articleID]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { title, content } = post;
+  const postID = props.match.params.postID;
 
   return (
     <Grid
@@ -41,7 +43,7 @@ const PostDetails = (props) => {
       <Typography variant='h1' m={2} textAlign='center'>
         {title}
       </Typography>
-      <Typography to='/add' variant='button' component={Link} color='inherit' my={2}>
+      <Typography to={{ pathname: `/edit/${postID}`, postID }} variant='button' component={Link} color='inherit' my={2}>
         + Edit Post
       </Typography>
       <p>{content}</p>
