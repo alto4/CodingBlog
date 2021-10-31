@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const PostDetails = (props) => {
@@ -39,6 +40,9 @@ const PostDetails = (props) => {
     >
       <Typography variant='h1' m={2} textAlign='center'>
         {title}
+      </Typography>
+      <Typography to='/add' variant='button' component={Link} color='inherit' my={2}>
+        + Edit Post
       </Typography>
       <p>{content}</p>
     </Grid>
